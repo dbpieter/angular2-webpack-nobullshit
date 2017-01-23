@@ -1,7 +1,8 @@
 'use strict';
 
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 var isExternal = function (module) {
     var userRequest = module.userRequest;
@@ -21,18 +22,20 @@ var config = function () {
     };
 
     var resolve = {
-        root: __dirname,
-        extensions: ['', '.ts', '.js', '.json']
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules'
+        ],
+        extensions: ['.ts', '.js', '.json']
     };
 
     var output = {
-        path: './dst/',
+        path: path.join(__dirname, 'dst'),
         filename: '[name].js'
     };
 
     var module = {
-        preLoaders: [],
-        loaders: [{
+        rules: [{
             test: /\.html$/,
             exclude: /node_modules/,
             loader: 'raw'
@@ -67,7 +70,12 @@ var config = function () {
         new HtmlWebpackPlugin({
             template: 'index.ejs',
             inject: 'body',
-        })
+        }),
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            __dirname
+        )
+
     ];
 
     var devtool = 'source-map';
