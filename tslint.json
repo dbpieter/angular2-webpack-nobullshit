@@ -1,16 +1,3 @@
-Skip to content
-Personal Open source Business Explore
-Sign upSign inPricingBlogSupport
-This repository
-Search
- Watch 115  Star 531  Fork 723 DeborahK/Angular2-GettingStarted
- Code  Issues 2  Pull requests 0  Projects 0  Pulse  Graphs
-Branch: master Find file Copy pathAngular2-GettingStarted/APM - Start/tslint.json
-cd79cb1  on 31 Aug 2016
-@DeborahK DeborahK Updated for RC 6
-1 contributor
-RawBlameHistory     
-93 lines (93 sloc)  1.85 KB
 {
   "rules": {
     "class-name": true,
@@ -104,5 +91,3 @@ RawBlameHistory
     ]
   }
 }
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
