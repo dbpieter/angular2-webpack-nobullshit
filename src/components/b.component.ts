@@ -9,6 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class BComponent implements OnInit {
 
     ngOnInit() {
-        console.log('b init');
+        console.log('b init'); 
     }
 }
