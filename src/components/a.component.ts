@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { DialogService } from "../dialog/dialog.service";
 import { TestDialog, AnotherDialog } from "./testDialog.component";
+import { TestDialogData } from './testDialogData';
 
 @Component({
     selector: 'a-component',
@@ -20,7 +21,7 @@ export class AComponent implements OnInit {
     }
 
     openDialog(): void {
-        this.dialogService.open(TestDialog);
+        this.dialogService.open(TestDialog, [{ provide: TestDialogData, useValue: new TestDialogData('blabla') }]);
     }
 
     openAnotherDialog(): void {

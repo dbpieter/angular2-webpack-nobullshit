@@ -43,6 +43,9 @@ export class DialogService {
         this.currentDialogComponentRef = this.viewContainerRef.createComponent(factory, 0, injector);
 
         let componentInstance: any = this.currentDialogComponentRef.instance;
+
+        // put the close function on the component instance if it can close itself (the dialog could also just use this service)
+        // wrap in arrow function to not fuck up the 'this' reference
         if (componentInstance instanceof SelfCloseableDialog) { componentInstance.close = (closeData: any) => { this.close(closeData); }; }
 
         this.currentDialogCloseDeferred = new Deferred<{}>();

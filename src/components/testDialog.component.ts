@@ -1,13 +1,19 @@
 
 import { Component } from '@angular/core';
 import { SelfCloseableDialog } from '../dialog/dialog.service';
+import { TestDialogData } from './testDialogData';
 
 
 @Component({
     selector: 'test-dialog',
-    template: `<div><h1>I am a test "dialog"</h1><button (click)="closeSelf()"></button></div>`
+    template: `<div><h1>I am a test "dialog"</h1><button (click)="closeSelf()">SelfClose</button></div>`
 })
 export class TestDialog extends SelfCloseableDialog {
+
+    constructor(private testDialogData: TestDialogData) {
+        super();
+        console.log('dialogData received:', testDialogData);
+    }
 
     closeSelf(): void {
         this.close();
