@@ -8,6 +8,7 @@ import { BComponent } from './components/b.component';
 import { CComponent } from './components/c.component';
 
 import { CustomReuseStrategy } from './routing/customRouteReuseStrategy';
+import { DialogPlaceHolder } from "./dialog/dialogPlaceHolder.component";
 
 let routes: Routes = [{ path: '', component: AComponent },
 { path: 'a', component: AComponent },
@@ -21,7 +22,7 @@ let routes: Routes = [{ path: '', component: AComponent },
 @NgModule({
   imports: [BrowserModule,
     RouterModule.forRoot(routes)],
-  declarations: [AppComponent, AComponent, BComponent, CComponent],
+  declarations: [AppComponent, AComponent, BComponent, CComponent, DialogPlaceHolder],
   bootstrap: [AppComponent],
 
   providers: [

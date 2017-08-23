@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app',
     template: `
+        <dialog-placeholder></dialog-placeholder>
         <h1>It Works</h1>
         <nav>
             <br>
