@@ -18,7 +18,7 @@ var isExternal = function (module) {
 
 var config = function () {
     var entry = {
-        app: './src/main.ts'
+        app: './src/main.ts',
     };
 
     var resolve = {
@@ -50,7 +50,7 @@ var config = function () {
     };
 
     var devServer = {
-        contentBase: './app',
+        contentBase: './dst',
         stats: {
             colors: true,
             modules: false,
@@ -61,12 +61,28 @@ var config = function () {
     };
 
     var plugins = [
+
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks: function (module) {
-                return isExternal(module);
-            }
+            minChunks: ({
+                resource
+            }) => {
+                return resource && resource.indexOf('node_modules') >= 0;
+            },
         }),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'polyfills',
+            minChunks: ({
+                resource
+            }) => {
+                return resource && (resource.indexOf('zone.js') >= 0 || resource.indexOf('core-js') >= 0);
+            },
+        }),
+
+        // // Generate a 'manifest' chunk to be inlined in the HTML template
+        // new webpack.optimize.CommonsChunkPlugin('manifest'),
+
         new HtmlWebpackPlugin({
             template: 'index.ejs',
             inject: 'body',

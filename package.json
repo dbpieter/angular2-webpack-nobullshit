@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve:dist": "webpack && http-server ./dst",
+    "serve:dist": "http-server ./dst",
     "clean": "rm -rf ./dst",
     "build": "npm run clean && webpack",
-    "start": "webpack-dev-server --inline --history-api-fallback --progress --hot --open",
+    "build:dll": "webpack --config=webpack.dll.config.js",
+    "start": "webpack-dev-server --inline --history-api-fallback --progress --hot --open --debug",
     "test": "npm test"
   },
   "author": "",
@@ -23,12 +24,12 @@
     "@angular/platform-server": "~2.4.8",
     "@angular/router": "~3.4.8",
     "core-js": "^2.4.1",
-    "http-server": "^0.9.0",
     "rxjs": "5.2.0",
-    "ts-loader": "^2.0.0",
     "zone.js": "^0.7.7"
   },
   "devDependencies": {
+    "ts-loader": "^2.0.0",
+    "http-server": "^0.9.0",
     "html-webpack-plugin": "^2.28.0",
     "tslint": "^4.4.2",
     "typescript": "^2.2.1",
