@@ -8,7 +8,9 @@ import { BComponent } from './components/b.component';
 import { CComponent } from './components/c.component';
 
 import { CustomReuseStrategy } from './routing/customRouteReuseStrategy';
-import { DialogPlaceHolder } from "./dialog/dialogPlaceHolder.component";
+import { DialogPlaceHolder } from './dialog/dialogPlaceHolder.component';
+import { DialogService } from './dialog/dialog.service';
+import { TestDialog, AnotherDialog } from "./components/testDialog.component";
 
 let routes: Routes = [{ path: '', component: AComponent },
 { path: 'a', component: AComponent },
@@ -20,12 +22,13 @@ let routes: Routes = [{ path: '', component: AComponent },
 
 
 @NgModule({
-  imports: [BrowserModule,
-    RouterModule.forRoot(routes)],
-  declarations: [AppComponent, AComponent, BComponent, CComponent, DialogPlaceHolder],
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  declarations: [AppComponent, AComponent, BComponent, CComponent, DialogPlaceHolder, TestDialog, AnotherDialog],
   bootstrap: [AppComponent],
+  entryComponents: [TestDialog, AnotherDialog],
 
   providers: [
+    DialogService,
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
   ]
 })
