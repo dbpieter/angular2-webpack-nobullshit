@@ -1,8 +1,10 @@
 'use strict';
 
+const path = require('path');
+
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var isExternal = function (module) {
     var userRequest = module.userRequest;
@@ -40,8 +42,11 @@ var config = function () {
             exclude: /node_modules/,
             loader: 'raw'
         }, {
-            test: /\.scss$/,
-            loader: 'style!css!postcss!sass'
+            test: /\.css$/,
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"
+            })
         }, {
             test: /\.ts$/,
             exclude: /node_modules/,
@@ -90,8 +95,8 @@ var config = function () {
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname
-        )
-
+        ),
+        new ExtractTextPlugin("styles.css"),
     ];
 
     var devtool = 'source-map';

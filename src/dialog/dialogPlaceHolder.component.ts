@@ -1,12 +1,18 @@
-import { Component, ViewContainerRef } from "@angular/core";
+import { Component, ViewContainerRef, ViewChild } from "@angular/core";
 import { DialogService } from "./dialog.service";
 
 @Component({
     selector: 'dialog-placeholder',
-    template: '<template></template>'
+    template: '<template #target></template>'
 })
 export class DialogPlaceHolder {
-    constructor(viewContainerRef: ViewContainerRef, private dialogService: DialogService) {
-        this.dialogService.setViewContainerRef(viewContainerRef);
+    // we need a target inside the dialog-placeholder
+    // using the viewContainerRef of dialog-placeholder would create siblings instead of children
+    @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
+
+    constructor(private dialogService: DialogService) { }
+
+    ngAfterViewInit() {
+        this.dialogService.setViewContainerRef(this.target);
     }
 }

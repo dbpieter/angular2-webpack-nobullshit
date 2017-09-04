@@ -1,0 +1,25 @@
+dialog-placeholder {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+}
+
+.dialog {
+    position: relative;
+    border: 3px solid grey;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.dialog-header {
+    position: relative;
+    height: 35px;
+    border-bottom: 3px solid grey;
+}
+
+.dialog-header-right {
+    position: absolute;
+    right: 0;
+}
