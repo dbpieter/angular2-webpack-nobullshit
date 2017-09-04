@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { SelfCloseableDialog } from '../dialog/dialog.service';
 import { TestDialogData } from './testDialogData';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,21 +16,27 @@ import { Router } from '@angular/router';
         </div>
         <h1>I am a test "dialog"</h1>
         <h2>Tze page:</h2>
-        <router-outlet></router-outlet>
-        <button (click)="gotoPage(1)">Page1</button>
+        <router-outlet name="dialogOutlet"></router-outlet>
+        <a [routerLink]="[{ outlets: { dialogOutlet: ['testDialogPage1'] } }]" routerLinkActive="active">Page1</a>
         <button (click)="gotoPage(2)">Page2</button>
+        <button (click)="clearOutlet()">Clear outlet</button>
     </div>`
 })
 export class TestDialog extends SelfCloseableDialog {
 
     constructor(private testDialogData: TestDialogData
-        , private router: Router) {
+        , private router: Router, private activatedRoute: ActivatedRoute) {
         super();
         console.log('dialogData received:', testDialogData);
     }
 
-    closeSelf(): void {
+    async closeSelf(): Promise<void> {
+        await this.router.navigate([{ outlets: { dialogOutlet: null } }]);
         this.close();
+    }
+
+    clearOutlet(): void {
+        this.router.navigate([{ outlets: { dialogOutlet: null } }]);
     }
 
     ngOnDestroy(): void {
@@ -38,6 +44,7 @@ export class TestDialog extends SelfCloseableDialog {
     }
 
     gotoPage(pageNr: number): void {
+        this.router.navigate([{ outlets: { 'dialogOutlet': ['testDialogPage2'] } }]);
     }
 }
 

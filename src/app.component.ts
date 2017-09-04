@@ -15,9 +15,7 @@ import { Component } from '@angular/core';
                 B-Component
             </a>
             <br>
-            <a [routerLink]=" ['./c'] " routerLinkActive="active">
-                C-Component
-            </a>
+
         </nav>
         <main>
           <router-outlet></router-outlet>
